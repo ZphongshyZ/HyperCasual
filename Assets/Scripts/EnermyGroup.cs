@@ -11,6 +11,11 @@ public class EnermyGroup : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private float angel;
 
+    private void OnEnable()
+    {
+        amount = UnityEngine.Random.Range(0, 11);
+    }
+
     private void Start()
     {
         this.EnemyGenerate();

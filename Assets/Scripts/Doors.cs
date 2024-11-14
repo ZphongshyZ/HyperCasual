@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,6 +20,14 @@ public class Doors : MonoBehaviour
     [SerializeField] private int leftBonusAmount;
 
     [SerializeField] private Collider doorCollider;
+
+    private void OnEnable()
+    {
+        this.rightBonusType = GetRandomEnumValue<BonusType>();
+        this.rightBonusAmount = UnityEngine.Random.Range(0, 11);
+        this.leftBonusType = GetRandomEnumValue<BonusType>();
+        this.leftBonusAmount = UnityEngine.Random.Range(0, 11);
+    }
 
     private void Update()
     {
@@ -88,5 +97,12 @@ public class Doors : MonoBehaviour
     public void DisableCollider()
     {
         this.doorCollider.enabled = false;
+    }
+
+    public static T GetRandomEnumValue<T>()
+    {
+        Array values = Enum.GetValues(typeof(T));
+        System.Random random = new System.Random();
+        return (T)values.GetValue(random.Next(values.Length));
     }
 }
